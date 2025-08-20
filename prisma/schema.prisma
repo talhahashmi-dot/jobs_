@@ -1,0 +1,29 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Job {
+  id                Int      @id @default(autoincrement())
+  title             String
+  description       String
+  skills            String[] // Array of skills
+  job_type          String
+  location          String
+  experience_required String
+  urgency_type      String
+  required_education String
+  min_salary        String
+  max_salary        String
+  published_at      DateTime @default(now())
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+}
