@@ -3,7 +3,7 @@ import { logger } from "./utils/logger.js";
 import authRoutes from "./routes/authRoutes.js";
 import jobRoutes from "./routes/jobRoutes.js";
 import { errorHandler } from "./middleware/errorHandler.js";
-import { swaggerUiMiddleware, swaggerUiSetup } from "./config/swagger.js";
+import { swaggerUiMiddleware, swaggerUiSetup, swaggerSpec } from "./config/swagger.js";
 
 
 const app = express();
@@ -13,6 +13,9 @@ app.use(logger);
 
 // Swagger
 app.use("/api-docs", swaggerUiMiddleware, swaggerUiSetup);
+app.get("/swagger.json", (req, res) => {
+  res.json(swaggerSpec);
+});
 
 
 // Routes

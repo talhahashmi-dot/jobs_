@@ -1,5 +1,12 @@
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const routesGlob = path.join(__dirname, "..", "routes", "*.js");
 
 const options = {
   definition: {
@@ -11,7 +18,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:3001",
+        url: "/",
       },
     ],
     components: {
@@ -24,7 +31,7 @@ const options = {
       },
     },
   },
-  apis: ["./src/routes/*.js"], // 👈 Swagger will scan your route files for annotations
+  apis: [routesGlob],
 };
 
 export const swaggerSpec = swaggerJsdoc(options);
